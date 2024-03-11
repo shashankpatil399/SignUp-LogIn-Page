@@ -14,10 +14,6 @@ const User = new mongoose.Schema({
     mobile: {
         type :Number
     },
-    father: 
-    {
-        type : String
-    },
     image : {
         type :String
     },

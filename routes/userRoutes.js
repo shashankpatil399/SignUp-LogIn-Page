@@ -14,7 +14,7 @@ const expressValidator = require('express-validator');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, './upload/images')
+      cb(null, 'public/upload/images')
     },
     filename: function (req, file, cb) {
     let ext = path.extname(file.originalname);
@@ -29,24 +29,19 @@ router.post('/verify', verifyToken, (req, res) => {
     res.status(200).json({ message: 'Protected route accessed'}
 )})
 
-// router.post("/addUser", upload.single("image"), async (req, res) => {
-//   const data = new User({
+//     router.post("/addUser", upload.single("image"), async (req, res) => {
+//     const data = new User({
 //     name: req.body?.name,
 //     email: req.body?.email,
 //     mobile: req.body?.mobile,
 //     father: req.body?.father,
-//     image: req.file.originalname,  // Use req.file.filename to get the uploaded file name
+//     image: req.file.originalname,
+//     Use req.file.filename to get the uploaded file name
 //     password: req.body?.password,
-//   });
+//     });
 
-//   // Rest of the code...
-// });
-
-
-
-
-
-
+//     Rest of the code...
+//                          });
 // router.post ("/addUser",upload.single("image"),async (req,res)=>{
 //   const data = new User({
    
@@ -69,7 +64,7 @@ router.post("/addUser", upload.single("image"), async (req, res) => {
     password: req.body?.password,
   });
   let email = req.body.email;
-  const exist = await User.findOne({ email }); 
+  const exist = await User.findOne({email}); 
 
   if (exist) {
     return res.status(200).json({
@@ -94,6 +89,9 @@ router.post("/addUser", upload.single("image"), async (req, res) => {
     });
   }
 });
+router.get("/Lookup",userController.Lookup);
+router.post("/addCompany",userController.addCompany)
+router.post("/addEmployee",userController.addEmployee)
 // router.get("/getuser",userController.getuser);
 router.post("/Login",userController.login);
 // router.post("/addUser",userController.addUser);
